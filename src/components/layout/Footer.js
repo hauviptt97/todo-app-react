@@ -30,8 +30,7 @@ class Footer extends React.Component {
           <span>Choose Theme </span>
           <button
             onClick={() => this.submitThemeColor(RED)}
-            className="
-dot red"
+            className="dot red"
           />
           <button
             onClick={() => this.submitThemeColor(BLUE)}

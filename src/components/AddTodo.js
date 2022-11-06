@@ -11,15 +11,15 @@ function AddTodo(props) {
     });
   };
 
-  const addTodo = (e) => {
+  const handleAddTodoClick = (e) => {
     e.preventDefault();
-    props.addTodo(state.title);
+    props.handleAddTodoClick(state.title);
     setState({
       title: "",
     });
   };
   return (
-    <form className="form-container" onSubmit={addTodo}>
+    <form className="form-container" onSubmit={handleAddTodoClick}>
       <input
         type="text"
         placeholder="Add Todo..."

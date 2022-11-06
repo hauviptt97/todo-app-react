@@ -5,8 +5,15 @@ import Todos from "./Todos";
 import { v4 as uuid } from "uuid";
 import axios from "axios";
 import Footer from "../store/containers/Footer";
+import { useDispatch, useSelector } from "react-redux";
+import { addTodo } from "../store/actions/todoAction";
 
 function TodoApp() {
+  const todos = useSelector((state) => state.todos.list);
+  const dispatch = useDispatch();
+
+  console.log("todos: ", todos);
+
   const [state, setState] = useState({
     todos: [],
   });
@@ -42,23 +49,26 @@ function TodoApp() {
     });
   };
 
-  const addTodo = (title) => {
+  const handleAddTodoClick = (title) => {
     const newTodo = {
       id: uuid(),
       title: title,
       completed: false,
     };
-    setState({
-      todos: [...state.todos, newTodo],
-    });
+    const action = addTodo(newTodo);
+    dispatch(action);
+
+    // setState({
+    //   todos: [...state.todos, newTodo],
+    // });
   };
 
   return (
     <div className="container">
       <Header />
-      <AddTodo addTodo={addTodo} />
+      <AddTodo handleAddTodoClick={handleAddTodoClick} />
       <Todos
-        todos={state.todos}
+        todos={todos}
         handleChange={handleCheckboxChange}
         deleteTodo={deleteTodo}
       />
